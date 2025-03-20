@@ -3,38 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>My Portfolio</title>
+    <style>
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
-    <header class="bg-white shadow-md p-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold">My Portfolio</h1>
-        <nav>
-            <ul class="flex space-x-4">
-                <li><a href="#" class="text-gray-600 hover:text-black">Home</a></li>
-                <li><a href="#" class="text-gray-600 hover:text-black">About</a></li>
-                <li><a href="#" class="text-gray-600 hover:text-black">Projects</a></li>
-                <li><a href="#" class="text-gray-600 hover:text-black">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <section class="text-center py-12">
-        <h2 class="text-3xl font-semibold">What do you want to create?</h2>
-        <p class="text-gray-600 mt-2">Showcase your work with a portfolio or a single-page website.</p>
-    </section>
-    
-    <section class="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 p-6">
-        <div class="bg-white shadow-md rounded-lg p-6">
-            <img src="https://via.placeholder.com/400" alt="Collection of Work" class="w-full rounded">
-            <h3 class="text-xl font-semibold mt-4">Collection of Work</h3>
-            <p class="text-gray-600 mt-2">Create a multi-page portfolio to showcase your projects and skills.</p>
-        </div>
-        <div class="bg-white shadow-md rounded-lg p-6">
-            <img src="https://via.placeholder.com/400" alt="Welcome Page" class="w-full rounded">
-            <h3 class="text-xl font-semibold mt-4">Welcome Page</h3>
-            <p class="text-gray-600 mt-2">Create a simple landing page to introduce yourself and your work.</p>
-        </div>
-    </section>
+<body>
+
+    <h1>Welcome to My Portfolio</h1>
+    <p>Click the button below to open the calculator:</p>
+
+    <button onclick="window.open('calculator/index.html', '_blank')">Open Calculator</button>
+
 </body>
 </html>
