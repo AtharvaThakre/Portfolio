@@ -3,36 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atharva Thakre - Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <header>
-        <h1>Atharva Thakre</h1>
-        <p>Aspiring Web Developer | Passionate about Tech</p>
+<body class="bg-gray-100">
+    <header class="bg-white shadow-md p-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold">My Portfolio</h1>
+        <nav>
+            <ul class="flex space-x-4">
+                <li><a href="#" class="text-gray-600 hover:text-black">Home</a></li>
+                <li><a href="#" class="text-gray-600 hover:text-black">About</a></li>
+                <li><a href="#" class="text-gray-600 hover:text-black">Projects</a></li>
+                <li><a href="#" class="text-gray-600 hover:text-black">Contact</a></li>
+            </ul>
+        </nav>
     </header>
     
-    <section>
-        <h2>About Me</h2>
-        <p>Hello! I'm Atharva Thakre, an aspiring web developer and a creative thinker with a deep passion for technology and innovation. Ever since I was a kid, I have loved fixing technical problems on my own, whether it was troubleshooting a gadget or figuring out how something worked. This curiosity led me to explore the world of coding and web development.</p>
+    <section class="text-center py-12">
+        <h2 class="text-3xl font-semibold">What do you want to create?</h2>
+        <p class="text-gray-600 mt-2">Showcase your work with a portfolio or a single-page website.</p>
     </section>
     
-    <section>
-        <h2>Projects</h2>
-        <ul>
-            <li>Project 1 - <a href="#">Coming Soon</a></li>
-            <li>Project 2 - <a href="#">Coming Soon</a></li>
-        </ul>
+    <section class="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 p-6">
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <img src="https://via.placeholder.com/400" alt="Collection of Work" class="w-full rounded">
+            <h3 class="text-xl font-semibold mt-4">Collection of Work</h3>
+            <p class="text-gray-600 mt-2">Create a multi-page portfolio to showcase your projects and skills.</p>
+        </div>
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <img src="https://via.placeholder.com/400" alt="Welcome Page" class="w-full rounded">
+            <h3 class="text-xl font-semibold mt-4">Welcome Page</h3>
+            <p class="text-gray-600 mt-2">Create a simple landing page to introduce yourself and your work.</p>
+        </div>
     </section>
-    
-    <section>
-        <h2>Contact</h2>
-        <p>Email: your.email@example.com</p>
-        <p>GitHub: <a href="https://github.com/AtharvaThakre" target="_blank">github.com/AtharvaThakre</a></p>
-    </section>
-    
-    <footer>
-        <p>&copy; 2025 Atharva Thakre. All Rights Reserved.</p>
-    </footer>
 </body>
 </html>
