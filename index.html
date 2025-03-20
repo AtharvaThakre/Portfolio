@@ -4,45 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>My Portfolio</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <h1>My Portfolio</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
     
-    <section>
-        <h2>What do you want to create?</h2>
-        <p>Showcase your work with a portfolio or a single-page website.</p>
-        
-        <div class="card-container">
-            <div class="card">
-                <h3>Collection of Work</h3>
-                <p>Create a multi-page portfolio to showcase your projects and skills.</p>
-            </div>
-            <div class="card">
-                <h3>Welcome Page</h3>
-                <p>Create a simple landing page to introduce yourself and your work.</p>
-            </div>
+    <section id="home" class="hero">
+        <div class="container">
+            <h2>Welcome to My Portfolio</h2>
+            <p>Showcasing my work and projects in a simple, elegant way.</p>
         </div>
-        
-        <!-- Calculator Button Added Here -->
-        <div style="text-align: center; margin-top: 20px;">
-            <a href="calculator/index.html">
-                <button style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Open Calculator</button>
-            </a>
+    </section>
+    
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="project-item">
+                <h3>Calculator</h3>
+                <p>A simple calculator project built using HTML, CSS, and JavaScript.</p>
+                <a href="calculator.html" class="btn">Open Calculator</a>
+            </div>
         </div>
     </section>
     
     <footer>
+        <div class="container">
+            <p>&copy; 2025 My Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
         <p>&copy; 2025 My Portfolio. All rights reserved.</p>
     </footer>
 </body>
