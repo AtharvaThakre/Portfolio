@@ -4,27 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
-    <style>
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <h1>Welcome to My Portfolio</h1>
-    <p>Click the button below to open the calculator:</p>
-
-    <button onclick="window.open('calculator/index.html', '_blank')">Open Calculator</button>
-
+    <header>
+        <h1>My Portfolio</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section>
+        <h2>What do you want to create?</h2>
+        <p>Showcase your work with a portfolio or a single-page website.</p>
+        
+        <div class="card-container">
+            <div class="card">
+                <h3>Collection of Work</h3>
+                <p>Create a multi-page portfolio to showcase your projects and skills.</p>
+            </div>
+            <div class="card">
+                <h3>Welcome Page</h3>
+                <p>Create a simple landing page to introduce yourself and your work.</p>
+            </div>
+        </div>
+        
+        <!-- Calculator Button Added Here -->
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="calculator/index.html">
+                <button style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Open Calculator</button>
+            </a>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 My Portfolio. All rights reserved.</p>
+    </footer>
 </body>
 </html>
