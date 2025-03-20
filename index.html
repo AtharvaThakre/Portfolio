@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,80 +15,104 @@
             background-color: #f8f9fa;
             color: #333;
             text-align: center;
-            padding: 20px;
         }
-        .container {
-            max-width: 900px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        .navbar {
+            background: black;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
         }
-        h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-        nav {
-            margin-bottom: 20px;
-        }
-        nav a {
-            margin: 0 15px;
+        .navbar a {
+            color: white;
             text-decoration: none;
-            color: #007bff;
-            font-size: 18px;
+            margin: 0 15px;
         }
-        .section {
-            margin: 30px 0;
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh;
+            background: white;
+            position: relative;
         }
-        .projects {
+        .hero-content {
+            display: flex;
+            align-items: center;
+        }
+        .hero-content img {
+            width: 300px;
+            border-radius: 50%;
+        }
+        .hero-text {
+            margin-left: 20px;
             text-align: left;
         }
-        .project-card {
+        .hero-text h1 {
+            font-size: 48px;
+        }
+        .projects {
+            padding: 50px 20px;
             background: #fff;
-            padding: 15px;
-            margin: 10px 0;
+        }
+        .projects h2 {
+            margin-bottom: 20px;
+        }
+        .project-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .project-card {
+            background: #f1f1f1;
+            padding: 20px;
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 300px;
         }
         .footer {
-            margin-top: 30px;
-            font-size: 14px;
-            color: #666;
+            background: black;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>My Portfolio</h1>
-        <nav>
+    <div class="navbar">
+        <div class="logo">My Portfolio</div>
+        <div>
             <a href="#home">Home</a>
-            <a href="#about">About</a>
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
-        </nav>
-
-        <div id="home" class="section">
-            <h2>Welcome to My Portfolio</h2>
-            <p>Showcasing my work and projects in a simple, elegant way.</p>
         </div>
-
-        <div id="projects" class="section projects">
-            <h2>Projects</h2>
+    </div>
+    
+    <div class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Designer & Coder</h1>
+                <p>Creating elegant UI designs and efficient code solutions.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="projects" class="projects">
+        <h2>Projects</h2>
+        <div class="project-grid">
             <div class="project-card">
                 <h3>Calculator</h3>
-                <p>A simple calculator project built using HTML, CSS, and JavaScript.</p>
+                <p>A simple calculator built using HTML, CSS, and JavaScript.</p>
                 <a href="calculator.html" target="_blank">Open Calculator</a>
             </div>
         </div>
-
-        <div class="footer">
-            &copy; 2025 My Portfolio. All rights reserved.
-        </div>
+    </div>
+    
+    <div class="footer">
+        &copy; 2025 My Portfolio. All rights reserved.
     </div>
 </body>
 </html>
-
         <p>&copy; 2025 My Portfolio. All rights reserved.</p>
     </footer>
 </body>
