@@ -9,26 +9,36 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Arial, sans-serif;
     }
     body {
       background-color: #f8f9fa;
       color: #333;
       text-align: center;
+      line-height: 1.6;
     }
     .navbar {
-      background: black;
-      padding: 15px;
+      background: #2c3e50;
+      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       color: white;
       flex-wrap: wrap;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
     .navbar a {
       color: white;
       text-decoration: none;
       margin: 0 15px;
+      transition: color 0.3s ease;
+    }
+    .navbar a:hover {
+      color: #00bcd4;
+    }
+    .logo {
+      font-weight: bold;
+      font-size: 1.4rem;
     }
     .hero {
       display: flex;
@@ -36,7 +46,7 @@
       align-items: center;
       min-height: 80vh;
       background: white;
-      padding: 20px;
+      padding: 40px 20px;
       flex-wrap: wrap;
     }
     .hero-content {
@@ -58,6 +68,7 @@
     .hero-text h1 {
       font-size: 48px;
       margin-bottom: 10px;
+      color: #2c3e50;
     }
     .hero-text p {
       font-size: 18px;
@@ -67,26 +78,57 @@
       background: #fff;
     }
     .projects h2 {
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      font-size: 2.2rem;
+      color: #2c3e50;
     }
     .project-grid {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 30px;
       flex-wrap: wrap;
     }
     .project-card {
       background: #f1f1f1;
       padding: 20px;
-      border-radius: 5px;
+      border-radius: 10px;
       width: 300px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    .project-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    .project-card h3 {
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+    .project-card p {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 10px;
+    }
+    .project-card a {
+      color: #0077cc;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.2s ease;
+    }
+    .project-card a:hover {
+      color: #005fa3;
     }
     .footer {
-      background: black;
+      background: #2c3e50;
       color: white;
       padding: 15px;
-      margin-top: 20px;
+      margin-top: 40px;
     }
 
     /* Responsive text */
@@ -120,7 +162,6 @@
 
   <div class="hero" id="home">
     <div class="hero-content">
-      <!-- ✅ Make sure folder is named 'IMAGES' in your repo -->
       <img src="images/image.png" alt="Atharva - Designer & Coder">
       <div class="hero-text">
         <h1>Designer &lt;Coder&gt;</h1>
@@ -132,11 +173,22 @@
   <div id="projects" class="projects">
     <h2>Projects</h2>
     <div class="project-grid">
+
+      <!-- Project 1: Calculator -->
       <div class="project-card">
         <h3>Calculator</h3>
         <p>A simple calculator built using HTML, CSS, and JavaScript.</p>
         <a href="calculator/calculator.html" target="_blank">Open Calculator</a>
       </div>
+
+      <!-- ✅ Project 2: Image-based UI Mockup -->
+      <div class="project-card">
+        <img src="images/image.png" alt="UI Mockup Project">
+        <h3>UI Mockup Design</h3>
+        <p>A creative user interface mockup designed for a mobile/web app using Figma and design tools.</p>
+        <a href="images/image.png" target="_blank">View Full Image</a>
+      </div>
+
     </div>
   </div>
 
