@@ -1,121 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        body {
-            background-color: #f8f9fa;
-            color: #333;
-            text-align: center;
-        }
-        .navbar {
-            background: black;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-        }
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-        }
-        .hero {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 80vh;
-            background: white;
-            position: relative;
-        }
-        .hero-content {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
-        .hero-content img {
-            width: 300px;
-            height: auto;
-            border-radius: 10px;
-        }
-        .hero-text {
-            text-align: left;
-            max-width: 400px;
-        }
-        .hero-text h1 {
-            font-size: 48px;
-        }
-        .projects {
-            padding: 50px 20px;
-            background: #fff;
-        }
-        .projects h2 {
-            margin-bottom: 20px;
-        }
-        .project-grid {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .project-card {
-            background: #f1f1f1;
-            padding: 20px;
-            border-radius: 5px;
-            width: 300px;
-        }
-        .footer {
-            background: black;
-            color: white;
-            padding: 15px;
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background-color: #f8f9fa;
+      color: #333;
+      text-align: center;
+    }
+    .navbar {
+      background: black;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      flex-wrap: wrap;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+    }
+    .hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+      background: white;
+      padding: 20px;
+      flex-wrap: wrap;
+    }
+    .hero-content {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .hero-content img {
+      width: 300px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .hero-text {
+      text-align: left;
+      max-width: 400px;
+    }
+    .hero-text h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+    .hero-text p {
+      font-size: 18px;
+    }
+    .projects {
+      padding: 50px 20px;
+      background: #fff;
+    }
+    .projects h2 {
+      margin-bottom: 20px;
+    }
+    .project-grid {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .project-card {
+      background: #f1f1f1;
+      padding: 20px;
+      border-radius: 5px;
+      width: 300px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+    .footer {
+      background: black;
+      color: white;
+      padding: 15px;
+      margin-top: 20px;
+    }
+
+    /* Responsive text */
+    @media (max-width: 600px) {
+      .hero-text h1 {
+        font-size: 32px;
+      }
+      .hero-text p {
+        font-size: 16px;
+      }
+      .hero-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .hero-text {
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="navbar">
-        <div class="logo">My Portfolio</div>
-        <div>
-            <a href="#home">Home</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </div>
+  <div class="navbar">
+    <div class="logo">My Portfolio</div>
+    <div>
+      <a href="#home">Home</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
     </div>
+  </div>
 
-    <div class="hero" id="home">
-        <div class="hero-content">
-            <!-- ✅ Updated image path -->
-            <img src="images/image.png" alt="Designer Coder">
-            <div class="hero-text">
-                <h1>Designer &lt;Coder&gt;</h1>
-                <p>Creating elegant UI designs and efficient code solutions.</p>
-            </div>
-        </div>
+  <div class="hero" id="home">
+    <div class="hero-content">
+      <!-- ✅ Make sure folder is named 'IMAGES' in your repo -->
+      <img src="IMAGES/image.png" alt="Atharva - Designer & Coder">
+      <div class="hero-text">
+        <h1>Designer &lt;Coder&gt;</h1>
+        <p>Creating elegant UI designs and efficient code solutions.</p>
+      </div>
     </div>
+  </div>
 
-    <div id="projects" class="projects">
-        <h2>Projects</h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <h3>Calculator</h3>
-                <p>A simple calculator built using HTML, CSS, and JavaScript.</p>
-                <a href="calculator/calculator.html" target="_blank">Open Calculator</a>
-            </div>
-        </div>
+  <div id="projects" class="projects">
+    <h2>Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>Calculator</h3>
+        <p>A simple calculator built using HTML, CSS, and JavaScript.</p>
+        <a href="calculator/calculator.html" target="_blank">Open Calculator</a>
+      </div>
     </div>
+  </div>
 
-    <div class="footer">
-        &copy; 2025 My Portfolio. All rights reserved.
-    </div>
+  <div class="footer">
+    &copy; 2025 My Portfolio. All rights reserved.
+  </div>
 </body>
 </html>
