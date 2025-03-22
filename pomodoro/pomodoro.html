@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Advanced Pomodoro Timer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Pomodoro Timer</h1>
+      <button id="theme-toggle">🌙</button>
+    </header>
+
+    <section class="timer-section">
+      <div class="session-buttons">
+        <button class="session-btn active" data-mode="work">Work</button>
+        <button class="session-btn" data-mode="short">Short Break</button>
+        <button class="session-btn" data-mode="long">Long Break</button>
+      </div>
+
+      <div class="timer-display">
+        <div id="timer">25:00</div>
+        <div class="progress-ring">
+          <!-- Optional circular progress (handled by CSS/JS) -->
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="start">Start</button>
+        <button id="pause">Pause</button>
+        <button id="reset">Reset</button>
+      </div>
+    </section>
+
+    <section class="customization">
+      <h2>Customize Timer</h2>
+      <form id="settings-form">
+        <label>
+          Work Duration (min):
+          <input type="number" id="work-duration" value="25" min="1" />
+        </label>
+        <label>
+          Short Break (min):
+          <input type="number" id="short-duration" value="5" min="1" />
+        </label>
+        <label>
+          Long Break (min):
+          <input type="number" id="long-duration" value="15" min="1" />
+        </label>
+        <label>
+          Sessions Before Long Break:
+          <input type="number" id="sessions-before-long" value="4" min="1" />
+        </label>
+        <button type="submit">Save Settings</button>
+      </form>
+    </section>
+
+    <section class="session-stats">
+      <h2>Pomodoros Completed: <span id="pomodoro-count">0</span></h2>
+      <p id="quote">"Stay focused and keep grinding!"</p>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
