@@ -3,152 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Weather App</title>
   <style>
-    /* Back to Top Button */
-    #topBtn {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 99;
-      background-color: #007bff;
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #4facfe, #00f2fe);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       color: white;
-      border: none;
-      padding: 10px 15px;
-      font-size: 18px;
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      transition: background 0.3s ease;
     }
 
-    #topBtn:hover {
-      background-color: #0056b3;
+    .weather-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
     }
 
-    /* Dark Mode Toggle */
-    .dark-mode {
-      background-color: #121212;
-      color: #e0e0e0;
+    .weather-box h2 {
+      margin-bottom: 10px;
     }
 
-    .dark-mode .navbar,
-    .dark-mode .footer {
-      background-color: #1f1f1f;
-    }
-
-    .dark-mode .project-card,
-    .dark-mode .hero,
-    .dark-mode .projects {
-      background-color: #222;
-    }
-
-    .dark-toggle {
-      position: absolute;
-      right: 30px;
-      top: 18px;
-      background: #333;
-      color: #fff;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: background 0.3s ease;
-    }
-
-    .dark-toggle:hover {
-      background: #555;
+    .weather-box p {
+      margin: 5px 0;
+      font-size: 1.2rem;
     }
   </style>
 </head>
 <body>
-  <div class="navbar">
-    <div class="logo">My Portfolio</div>
-    <div>
-      <a href="#home">Home</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </div>
-    <button class="dark-toggle" onclick="toggleDarkMode()">Toggle Dark</button>
+  <div class="weather-box">
+    <h2>Fetching Weather...</h2>
+    <p>Please wait while we detect your location.</p>
   </div>
-
-  <div class="hero" id="home">
-    <div class="hero-content">
-      <img src="images/image.png" alt="Atharva - Designer & Coder">
-      <div class="hero-text">
-        <h1 id="typing">|</h1>
-        <p>I am a 12th-grade student with a solid foundation in HTML, CSS, and JavaScript, acquired through self-learning via online tutorials. My interest in web development began at a young age, and I created this website to showcase my personal projects and growing skillset.</p>
-      </div>
-    </div>
-  </div>
-
-  <div id="projects" class="projects">
-    <h2>Projects</h2>
-    <div class="project-grid">
-      <div class="project-card">
-        <h3>Pomodoro Timer</h3>
-        <p>A Simple Pomodoro Timer to Efficiently make use of your time.</p>
-        <a href="pomodoro/pomodoro.html" target="_blank">Open Pomodoro Timer</a>
-      </div>
-
-      <div class="project-card">
-        <h3>Color Palette Generator</h3>
-        <p>A creative Color Palette Generator for users to enhance their Projects.</p>
-        <a href="colorpalette/colorpalette.html" target="_blank">Open Color Palette</a>
-      </div>
-
-      <div class="project-card">
-        <h3>Calculator</h3>
-        <p>A simple calculator built using HTML, CSS, and JavaScript.</p>
-        <a href="calculator/calculator.html" target="_blank">Open Calculator</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer">
-    &copy; 2025 My Portfolio. All rights reserved.
-  </div>
-
-  <button onclick="scrollToTop()" id="topBtn" title="Go to top">&#8679;</button>
 
   <script>
-    // Back to top button
-    const topBtn = document.getElementById("topBtn");
-    window.onscroll = function () {
-      topBtn.style.display = document.documentElement.scrollTop > 100 ? "block" : "none";
-    };
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    const apiKey = "f170abe618fd7725a4b61cd4eff628cc";
+    const weatherBox = document.querySelector(".weather-box");
 
-    // Dark mode toggle
-    function toggleDarkMode() {
-      document.body.classList.toggle("dark-mode");
-    }
-
-    // Typing animation
-    const texts = ["Designer <Coder>", "Creative Thinker", "Problem Solver"];
-    let count = 0;
-    let index = 0;
-    let currentText = "";
-    let letter = "";
-    function type() {
-      if (count === texts.length) count = 0;
-      currentText = texts[count];
-      letter = currentText.slice(0, ++index);
-      document.getElementById("typing").textContent = letter + "|";
-      if (letter.length === currentText.length) {
-        count++;
-        index = 0;
-        setTimeout(type, 2000);
+    window.addEventListener("load", () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(success, error);
       } else {
-        setTimeout(type, 100);
+        weatherBox.innerHTML = "<h2>Geolocation Not Supported</h2>";
       }
+    });
+
+    function success(position) {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          const city = data.name;
+          const temp = Math.round(data.main.temp);
+          const desc = data.weather[0].description;
+
+          weatherBox.innerHTML = `
+            <h2>📍 ${city}</h2>
+            <p>🌡️ Temperature: ${temp}°C</p>
+            <p>🌤️ Condition: ${desc}</p>
+          `;
+        })
+        .catch(() => {
+          weatherBox.innerHTML = "<h2>Failed to fetch weather data.</h2>";
+        });
     }
-    document.addEventListener("DOMContentLoaded", type);
+
+    function error() {
+      weatherBox.innerHTML = "<h2>Location access denied.</h2>";
+    }
   </script>
 </body>
 </html>
