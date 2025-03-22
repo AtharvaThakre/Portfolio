@@ -4,144 +4,147 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
     }
     body {
-      background-color: #f8f9fa;
+      background-color: #f4f6f9;
       color: #333;
-      text-align: center;
       line-height: 1.6;
+      scroll-behavior: smooth;
     }
     .navbar {
-      background: #2c3e50;
-      padding: 15px 20px;
+      background: #1e1e2f;
+      padding: 15px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       color: white;
       flex-wrap: wrap;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
     .navbar a {
       color: white;
       text-decoration: none;
       margin: 0 15px;
+      font-weight: 500;
       transition: color 0.3s ease;
     }
     .navbar a:hover {
-      color: #00bcd4;
+      color: #00d1b2;
     }
     .logo {
-      font-weight: bold;
-      font-size: 1.4rem;
+      font-weight: 600;
+      font-size: 1.6rem;
+      letter-spacing: 1px;
     }
     .hero {
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 80vh;
-      background: white;
+      background: linear-gradient(to right, #f9f9f9, #e2e8f0);
       padding: 40px 20px;
       flex-wrap: wrap;
     }
     .hero-content {
       display: flex;
       align-items: center;
-      gap: 40px;
+      gap: 50px;
       flex-wrap: wrap;
     }
     .hero-content img {
       width: 300px;
       height: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
     }
     .hero-text {
-      text-align: left;
-      max-width: 400px;
+      max-width: 500px;
     }
     .hero-text h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-      color: #2c3e50;
+      font-size: 3rem;
+      color: #1e1e2f;
     }
     .hero-text p {
-      font-size: 18px;
+      font-size: 1.2rem;
+      margin-top: 10px;
+      color: #555;
     }
     .projects {
-      padding: 50px 20px;
+      padding: 60px 20px;
       background: #fff;
+      text-align: center;
     }
     .projects h2 {
-      margin-bottom: 30px;
-      font-size: 2.2rem;
-      color: #2c3e50;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      color: #1e1e2f;
     }
     .project-grid {
-      display: flex;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 30px;
-      flex-wrap: wrap;
+      padding: 0 20px;
     }
     .project-card {
-      background: #f1f1f1;
-      padding: 20px;
-      border-radius: 10px;
-      width: 300px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: #f8f9fb;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease-in-out;
     }
     .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
-    .project-card img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
     }
     .project-card h3 {
-      margin-bottom: 10px;
-      color: #2c3e50;
+      margin-bottom: 15px;
+      color: #1e1e2f;
     }
     .project-card p {
-      font-size: 15px;
-      color: #555;
-      margin-bottom: 10px;
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 15px;
     }
     .project-card a {
-      color: #0077cc;
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #00d1b2;
+      color: white;
+      border-radius: 6px;
       text-decoration: none;
-      font-weight: bold;
-      transition: color 0.2s ease;
+      font-weight: 500;
+      transition: background-color 0.2s ease;
     }
     .project-card a:hover {
-      color: #005fa3;
+      background-color: #00b89c;
     }
     .footer {
-      background: #2c3e50;
+      background: #1e1e2f;
       color: white;
-      padding: 15px;
-      margin-top: 40px;
+      padding: 20px;
+      margin-top: 60px;
+      text-align: center;
+      font-size: 0.9rem;
     }
-
-    /* Responsive text */
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       .hero-text h1 {
-        font-size: 32px;
+        font-size: 2.2rem;
       }
       .hero-text p {
-        font-size: 16px;
+        font-size: 1rem;
       }
       .hero-content {
         flex-direction: column;
-        align-items: center;
         text-align: center;
       }
       .hero-text {
@@ -174,21 +177,18 @@
     <h2>Projects</h2>
     <div class="project-grid">
 
-      <!-- ✅ Project 2: Image-based UI Mockup -->
       <div class="project-card">
         <h3>Pomodoro Timer</h3>
         <p>A Simple Pomodoro Timer to Efficiently make use of your time.</p>
         <a href="pomodoro/pomodoro.html" target="_blank">Open Pomodoro Timer</a>
       </div>
 
-      <!-- ✅ Project 2: Image-based UI Mockup -->
       <div class="project-card">
         <h3>Color Palette Generator</h3>
-        <p>A creative Color Palette Generator for users to enhance there Projects.</p>
+        <p>A creative Color Palette Generator for users to enhance their projects.</p>
         <a href="colorpalette/colorpalette.html" target="_blank">Open Color Palette</a>
       </div>
 
-      <!-- Project 1: Calculator -->
       <div class="project-card">
         <h3>Calculator</h3>
         <p>A simple calculator built using HTML, CSS, and JavaScript.</p>
