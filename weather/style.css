@@ -1,145 +1,86 @@
-/* Base Reset */
+/* style.css */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right top, #6dd5fa, #2980b9);
-  color: #fff;
+body, html {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  transition: background 0.5s ease-in-out;
+}
+
+.app-container {
+  height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  transition: background 0.5s ease;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1s ease-in-out;
+  padding: 20px;
 }
 
-.weather-container {
-  background: rgba(255, 255, 255, 0.1);
+.weather-box {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
   border-radius: 20px;
-  padding: 2rem;
-  width: 100%;
-  max-width: 400px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 30px 40px;
   text-align: center;
-  transition: all 0.3s ease;
+  color: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  max-width: 300px;
+  animation: fadeIn 1s ease forwards;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
+.weather-box h1 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
 }
 
-header h1 {
-  font-size: 1.6rem;
-}
-
-#theme-toggle {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #fff;
-}
-
-.search-section {
-  margin-bottom: 1.5rem;
-  display: flex;
-  gap: 0.5rem;
-}
-
-#city-input {
-  flex: 1;
-  padding: 0.5rem;
-  border-radius: 10px;
-  border: none;
-  font-size: 1rem;
-}
-
-#search-btn {
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  border: none;
-  background: #fff;
-  color: #2980b9;
+.temperature {
+  font-size: 3.5rem;
   font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
 }
 
-#search-btn:hover {
-  background: #e0e0e0;
+.description {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  text-transform: capitalize;
 }
 
-.weather-card {
-  margin-top: 1.5rem;
-  animation: fadeIn 0.8s ease;
-}
-
-.weather-icon img {
+.weather-icon {
   width: 100px;
-  margin-bottom: 1rem;
-  transition: transform 0.3s ease;
+  height: 100px;
+  margin: 10px 0;
+  animation: float 4s ease-in-out infinite;
 }
 
-.weather-icon img:hover {
-  transform: scale(1.1);
+.details {
+  font-size: 1rem;
+  margin-top: 15px;
+  text-align: left;
 }
 
-.weather-info h2 {
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
+.details p {
+  margin: 6px 0;
 }
 
-.weather-info p {
-  font-size: 1.1rem;
-  margin: 0.2rem 0;
+/* Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
-.extras {
-  margin-top: 1rem;
-  font-size: 0.95rem;
-  color: #dcefff;
-}
-
-footer {
-  margin-top: 2rem;
-  font-size: 0.8rem;
-  opacity: 0.8;
-}
-
-/* Hidden until data loads */
-.hidden {
-  display: none;
-}
-
-/* Dark Mode */
-body.dark {
-  background: linear-gradient(to right top, #2c3e50, #4ca1af);
-  color: #f1f1f1;
-}
-
-body.dark .weather-container {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-body.dark #search-btn {
-  background: #333;
-  color: #fff;
-}
-
-body.dark #search-btn:hover {
-  background: #444;
-}
-
-/* Fade-in animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -149,4 +90,29 @@ body.dark #search-btn:hover {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Weather Backgrounds (these will be added dynamically in JS too) */
+.sunny {
+  background-image: url('https://source.unsplash.com/1600x900/?sunny,sky');
+}
+
+.cloudy {
+  background-image: url('https://source.unsplash.com/1600x900/?cloudy,sky');
+}
+
+.rainy {
+  background-image: url('https://source.unsplash.com/1600x900/?rainy,weather');
+}
+
+.stormy {
+  background-image: url('https://source.unsplash.com/1600x900/?storm,clouds');
+}
+
+.snowy {
+  background-image: url('https://source.unsplash.com/1600x900/?snow,winter');
+}
+
+.default {
+  background-image: url('https://source.unsplash.com/1600x900/?nature,weather');
 }
