@@ -1,47 +1,103 @@
-body, html {
+/* Reset and base */
+* {
   margin: 0;
   padding: 0;
-  font-family: "Segoe UI", sans-serif;
-  height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #1e1e1e;
+  color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #e0e0e0;
+  min-height: 100vh;
+  padding: 20px;
 }
 
 .app-container {
-  background: white;
+  background: #2b2b2b;
   border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  max-width: 800px;
+  width: 100%;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
   text-align: center;
-  transition: background 0.5s ease;
 }
 
-.weather-box img.weather-icon {
-  width: 100px;
-  height: 100px;
+/* Weather Info */
+.weather-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-.temperature {
-  font-size: 2rem;
+.weather-icon {
+  width: 80px;
+  height: 80px;
+}
+
+.temp-main {
+  font-size: 64px;
   font-weight: bold;
+  color: #ff7043;
 }
 
-.description {
-  text-transform: capitalize;
-  font-size: 1.2rem;
-  margin: 10px 0;
+.weather-details {
+  font-size: 16px;
+  color: #bbb;
+  margin-top: 10px;
 }
 
-.details p {
-  margin: 5px 0;
+/* Toggle Buttons */
+.toggle-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-/* Background color classes */
-.sunny { background: #ffe57f; }
-.cloudy { background: #cfd8dc; }
-.rainy { background: #90caf9; }
-.stormy { background: #616161; color: white; }
-.snowy { background: #e0f7fa; }
-.default { background: #eeeeee; }
+.toggle-container button {
+  background: #3a3a3a;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.toggle-container button.active {
+  background: #ff7043;
+}
+
+/* Chart Container */
+.chart-container {
+  margin-top: 30px;
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .weather-info {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .temp-main {
+    font-size: 48px;
+  }
+}
