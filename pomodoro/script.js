@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const themeToggle = document.getElementById('theme-toggle');
 
   const quoteEl = document.getElementById('quote');
-  const sessionCountEl = document.getElementById('pomodoro-count'); // correct span ID
+  const sessionCountEl = document.getElementById('pomodoro-count');
   const saveSettingsForm = document.getElementById('settings-form');
 
   let currentMode = 'work';
@@ -31,16 +31,19 @@ document.addEventListener("DOMContentLoaded", function () {
     "Keep calm and Pomodoro on."
   ];
 
+  // Format time as MM:SS
   function formatTime(seconds) {
     const m = Math.floor(seconds / 60);
     const s = seconds % 60;
     return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
   }
 
+  // Update timer on screen
   function updateDisplay() {
     timerDisplay.textContent = formatTime(remainingTime);
   }
 
+  // Switch timer mode (work/short/long)
   function switchMode(mode) {
     clearInterval(timer);
     isRunning = false;
@@ -51,12 +54,14 @@ document.addEventListener("DOMContentLoaded", function () {
     showQuote();
   }
 
+  // Highlight active session button
   function updateActiveButton() {
     sessionButtons.forEach(btn => {
       btn.classList.toggle('active', btn.dataset.mode === currentMode);
     });
   }
 
+  // Start countdown
   function startTimer() {
     if (isRunning) return;
     isRunning = true;
@@ -75,11 +80,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 1000);
   }
 
+  // Pause countdown
   function pauseTimer() {
     clearInterval(timer);
     isRunning = false;
   }
 
+  // Reset timer to current mode's duration
   function resetTimer() {
     clearInterval(timer);
     isRunning = false;
@@ -87,33 +94,39 @@ document.addEventListener("DOMContentLoaded", function () {
     updateDisplay();
   }
 
+  // Show a random motivational quote
   function showQuote() {
     const random = Math.floor(Math.random() * quotes.length);
     quoteEl.textContent = quotes[random];
   }
 
+  // Toggle theme and icon
   themeToggle.addEventListener('click', () => {
     document.body.classList.toggle('dark');
+    document.documentElement.classList.toggle('dark'); // Apply dark mode to entire page
     themeToggle.textContent = document.body.classList.contains('dark') ? '🌞' : '🌙';
   });
 
+  // Event listeners for control buttons
   startBtn.addEventListener('click', startTimer);
   pauseBtn.addEventListener('click', pauseTimer);
   resetBtn.addEventListener('click', resetTimer);
 
+  // Session mode buttons
   sessionButtons.forEach(btn => {
     btn.addEventListener('click', () => switchMode(btn.dataset.mode));
   });
 
-  // Save settings from form
+  // Save custom durations from form
   saveSettingsForm.addEventListener('submit', (e) => {
     e.preventDefault();
     durations.work = parseInt(document.getElementById('work-duration').value) * 60;
     durations.short = parseInt(document.getElementById('short-duration').value) * 60;
     durations.long = parseInt(document.getElementById('long-duration').value) * 60;
-    switchMode(currentMode);
+    switchMode(currentMode); // Reset with new settings
     alert("Settings Saved ✅");
   });
 
+  // Initialize
   switchMode('work');
 });
