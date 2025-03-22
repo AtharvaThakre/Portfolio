@@ -4,152 +4,63 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-    body {
-      background-color: #f4f6f9;
-      color: #333;
-      line-height: 1.6;
-      scroll-behavior: smooth;
-    }
-    .navbar {
-      background: #1e1e2f;
-      padding: 15px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    /* Back to Top Button */
+    #topBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 99;
+      background-color: #007bff;
       color: white;
-      flex-wrap: wrap;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      border: none;
+      padding: 10px 15px;
+      font-size: 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s ease;
     }
-    .navbar a {
-      color: white;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: 500;
-      transition: color 0.3s ease;
+
+    #topBtn:hover {
+      background-color: #0056b3;
     }
-    .navbar a:hover {
-      color: #00d1b2;
+
+    /* Dark Mode Toggle */
+    .dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
     }
-    .logo {
-      font-weight: 600;
-      font-size: 1.6rem;
-      letter-spacing: 1px;
+
+    .dark-mode .navbar,
+    .dark-mode .footer {
+      background-color: #1f1f1f;
     }
-    .hero {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 80vh;
-      background: linear-gradient(to right, #f9f9f9, #e2e8f0);
-      padding: 40px 20px;
-      flex-wrap: wrap;
+
+    .dark-mode .project-card,
+    .dark-mode .hero,
+    .dark-mode .projects {
+      background-color: #222;
     }
-    .hero-content {
-      display: flex;
-      align-items: center;
-      gap: 50px;
-      flex-wrap: wrap;
-    }
-    .hero-content img {
-      width: 300px;
-      height: auto;
+
+    .dark-toggle {
+      position: absolute;
+      right: 30px;
+      top: 18px;
+      background: #333;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
       border-radius: 20px;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-    }
-    .hero-text {
-      max-width: 500px;
-    }
-    .hero-text h1 {
-      font-size: 3rem;
-      color: #1e1e2f;
-    }
-    .hero-text p {
-      font-size: 1.2rem;
-      margin-top: 10px;
-      color: #555;
-    }
-    .projects {
-      padding: 60px 20px;
-      background: #fff;
-      text-align: center;
-    }
-    .projects h2 {
-      font-size: 2.5rem;
-      margin-bottom: 40px;
-      color: #1e1e2f;
-    }
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      padding: 0 20px;
-    }
-    .project-card {
-      background: #f8f9fb;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s ease-in-out;
-    }
-    .project-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
-    }
-    .project-card h3 {
-      margin-bottom: 15px;
-      color: #1e1e2f;
-    }
-    .project-card p {
-      font-size: 0.95rem;
-      color: #666;
-      margin-bottom: 15px;
-    }
-    .project-card a {
-      display: inline-block;
-      padding: 8px 16px;
-      background-color: #00d1b2;
-      color: white;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: background-color 0.2s ease;
-    }
-    .project-card a:hover {
-      background-color: #00b89c;
-    }
-    .footer {
-      background: #1e1e2f;
-      color: white;
-      padding: 20px;
-      margin-top: 60px;
-      text-align: center;
+      cursor: pointer;
       font-size: 0.9rem;
+      transition: background 0.3s ease;
     }
-    @media (max-width: 768px) {
-      .hero-text h1 {
-        font-size: 2.2rem;
-      }
-      .hero-text p {
-        font-size: 1rem;
-      }
-      .hero-content {
-        flex-direction: column;
-        text-align: center;
-      }
-      .hero-text {
-        text-align: center;
-      }
+
+    .dark-toggle:hover {
+      background: #555;
     }
   </style>
 </head>
@@ -161,13 +72,14 @@
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
     </div>
+    <button class="dark-toggle" onclick="toggleDarkMode()">Toggle Dark</button>
   </div>
 
   <div class="hero" id="home">
     <div class="hero-content">
       <img src="images/image.png" alt="Atharva - Designer & Coder">
       <div class="hero-text">
-        <h1>Designer &lt;Coder&gt;</h1>
+        <h1 id="typing">|</h1>
         <p>Creating elegant UI designs and efficient code solutions.</p>
       </div>
     </div>
@@ -176,7 +88,6 @@
   <div id="projects" class="projects">
     <h2>Projects</h2>
     <div class="project-grid">
-
       <div class="project-card">
         <h3>Pomodoro Timer</h3>
         <p>A Simple Pomodoro Timer to Efficiently make use of your time.</p>
@@ -185,7 +96,7 @@
 
       <div class="project-card">
         <h3>Color Palette Generator</h3>
-        <p>A creative Color Palette Generator for users to enhance their projects.</p>
+        <p>A creative Color Palette Generator for users to enhance their Projects.</p>
         <a href="colorpalette/colorpalette.html" target="_blank">Open Color Palette</a>
       </div>
 
@@ -194,12 +105,50 @@
         <p>A simple calculator built using HTML, CSS, and JavaScript.</p>
         <a href="calculator/calculator.html" target="_blank">Open Calculator</a>
       </div>
-
     </div>
   </div>
 
   <div class="footer">
     &copy; 2025 My Portfolio. All rights reserved.
   </div>
+
+  <button onclick="scrollToTop()" id="topBtn" title="Go to top">&#8679;</button>
+
+  <script>
+    // Back to top button
+    const topBtn = document.getElementById("topBtn");
+    window.onscroll = function () {
+      topBtn.style.display = document.documentElement.scrollTop > 100 ? "block" : "none";
+    };
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // Dark mode toggle
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    // Typing animation
+    const texts = ["Designer <Coder>", "Creative Thinker", "Problem Solver"];
+    let count = 0;
+    let index = 0;
+    let currentText = "";
+    let letter = "";
+    function type() {
+      if (count === texts.length) count = 0;
+      currentText = texts[count];
+      letter = currentText.slice(0, ++index);
+      document.getElementById("typing").textContent = letter + "|";
+      if (letter.length === currentText.length) {
+        count++;
+        index = 0;
+        setTimeout(type, 2000);
+      } else {
+        setTimeout(type, 100);
+      }
+    }
+    document.addEventListener("DOMContentLoaded", type);
+  </script>
 </body>
 </html>
