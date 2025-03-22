@@ -1,8 +1,7 @@
-const apiKey = "f170abe618fd7725a4b61cd4eff628cc"; // Your OpenWeatherMap API key
+const apiKey = "f170abe618fd7725a4b61cd4eff628cc";
 const weatherBox = document.querySelector(".weather-box");
 const appContainer = document.querySelector(".app-container");
 
-// Mapping weather condition to class for background
 function getWeatherClass(condition) {
   condition = condition.toLowerCase();
   if (condition.includes("clear")) return "sunny";
@@ -13,43 +12,65 @@ function getWeatherClass(condition) {
   return "default";
 }
 
-// Fetch weather using lat & lon
 function fetchWeather(lat, lon) {
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-
   fetch(url)
-    .then(response => {
-      if (!response.ok) throw new Error("Weather data not found");
-      return response.json();
-    })
+    .then(res => res.json())
     .then(data => {
-      console.log("Weather data from geolocation:", data);
-      updateUI(data);
+      const temp = Math.round(data.main.temp);
+      const description = data.weather[0].description;
+      const iconCode = data.weather[0].icon;
+      const humidity = data.main.humidity;
+      const wind = data.wind.speed;
+      const city = data.name;
+
+      const weatherClass = getWeatherClass(description);
+      appContainer.className = `app-container ${weatherClass}`;
+
+      weatherBox.innerHTML = `
+        <h1>${city}</h1>
+        <img class="weather-icon" src="https://openweathermap.org/img/wn/${iconCode}@2x.png" alt="${description}" />
+        <div class="temperature">${temp}°C</div>
+        <div class="description">${description}</div>
+        <div class="details">
+          <p>Humidity: ${humidity}%</p>
+          <p>Wind: ${wind} km/h</p>
+        </div>
+      `;
     })
-    .catch(error => {
-      weatherBox.innerHTML = `<p style="color:white;">Error: ${error.message}</p>`;
+    .catch(err => {
+      console.error(err);
+      weatherBox.innerHTML = `<p style="color:red;">Failed to fetch weather.</p>`;
     });
 }
 
-// Fallback: Fetch weather by city
-function fetchWeatherByCity(city) {
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+function getLocationAndWeather() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        fetchWeather(pos.coords.latitude, pos.coords.longitude);
+      },
+      err => {
+        console.warn("Location denied, using default city (London)");
+        fetchFallbackCity();
+      }
+    );
+  } else {
+    fetchFallbackCity();
+  }
+}
 
+function fetchFallbackCity() {
+  const fallbackCity = "London";
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${fallbackCity}&appid=${apiKey}&units=metric`;
   fetch(url)
-    .then(response => {
-      if (!response.ok) throw new Error("City weather data not found");
-      return response.json();
-    })
-    .then(data => {
-      console.log("Weather data from city fallback:", data);
-      updateUI(data);
-    })
-    .catch(error => {
-      weatherBox.innerHTML = `<p style="color:white;">Error: ${error.message}</p>`;
+    .then(res => res.json())
+    .then(data => updateUI(data))
+    .catch(err => {
+      weatherBox.innerHTML = `<p style="color:red;">Failed to load fallback weather.</p>`;
     });
 }
 
-// Update DOM with data
 function updateUI(data) {
   const temp = Math.round(data.main.temp);
   const description = data.weather[0].description;
@@ -63,7 +84,7 @@ function updateUI(data) {
 
   weatherBox.innerHTML = `
     <h1>${city}</h1>
-    <img class="weather-icon" src="https://openweathermap.org/img/wn/${iconCode}@2x.png" alt="Weather icon" />
+    <img class="weather-icon" src="https://openweathermap.org/img/wn/${iconCode}@2x.png" alt="${description}" />
     <div class="temperature">${temp}°C</div>
     <div class="description">${description}</div>
     <div class="details">
@@ -73,26 +94,4 @@ function updateUI(data) {
   `;
 }
 
-// Geolocation on page load
-function getLocationAndWeather() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        const { latitude, longitude } = position.coords;
-        console.log("User location:", latitude, longitude);
-        fetchWeather(latitude, longitude);
-      },
-      error => {
-        console.warn("Geolocation denied or failed, using fallback city.");
-        weatherBox.innerHTML = `<p style="color:white;">Location access denied. Showing weather for London.</p>`;
-        fetchWeatherByCity("London");
-      }
-    );
-  } else {
-    weatherBox.innerHTML = `<p style="color:white;">Geolocation not supported by your browser. Showing weather for London.</p>`;
-    fetchWeatherByCity("London");
-  }
-}
-
-// Run on page load
 document.addEventListener("DOMContentLoaded", getLocationAndWeather);
