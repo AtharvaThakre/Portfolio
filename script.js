@@ -1,34 +1,43 @@
-// Typing effect
-const text = "Designer <Coder>";
-let index = 0;
-function type() {
-  const typedText = document.getElementById("typed-text");
-  if (index < text.length) {
-    typedText.innerHTML += text.charAt(index);
-    index++;
-    setTimeout(type, 120);
+const apiKey = "f170abe618fd7725a4b61cd4eff628cc";
+
+window.addEventListener("load", () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(success, error);
+  } else {
+    alert("Geolocation is not supported by this browser.");
   }
-}
-window.onload = type;
-
-// Cursor blink
-setInterval(() => {
-  const cursor = document.getElementById("cursor");
-  cursor.style.visibility = (cursor.style.visibility === 'hidden') ? 'visible' : 'hidden';
-}, 500);
-
-// Dark Mode Toggle
-const toggle = document.getElementById("darkToggle");
-toggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
-  toggle.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
 });
 
-// Back to top button
-const topBtn = document.getElementById("topBtn");
-window.onscroll = function () {
-  topBtn.style.display = window.scrollY > 200 ? "block" : "none";
-};
-topBtn.onclick = function () {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
+function success(position) {
+  const lat = position.coords.latitude;
+  const lon = position.coords.longitude;
+
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data); // For debugging
+      displayWeather(data);
+    })
+    .catch(err => {
+      console.error("Error fetching weather:", err);
+    });
+}
+
+function error() {
+  alert("Unable to retrieve your location.");
+}
+
+function displayWeather(data) {
+  const weatherBox = document.querySelector(".weather-box");
+  const city = data.name;
+  const temp = data.main.temp;
+  const desc = data.weather[0].description;
+
+  weatherBox.innerHTML = `
+    <h2>${city}</h2>
+    <p>${temp}°C</p>
+    <p>${desc}</p>
+  `;
+}
