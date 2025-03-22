@@ -1,103 +1,133 @@
-/* Reset and base */
+/* Reset & Base Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
 }
 
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #1e1e1e;
-  color: #fff;
+  background-color: #f4f4f4;
+  color: #222;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 20px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
+body.dark {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+/* App Container */
 .app-container {
-  background: #2b2b2b;
+  background: #fff;
+  width: 90%;
+  max-width: 600px;
   border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-  padding: 30px;
-  max-width: 800px;
-  width: 100%;
-}
-
-h1 {
-  font-size: 28px;
-  margin-bottom: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  padding: 2rem;
   text-align: center;
+  transition: background-color 0.3s;
 }
 
-/* Weather Info */
-.weather-info {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
+body.dark .app-container {
+  background: #2a2a2a;
+}
+
+/* Header & Info */
+.location {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.temp {
+  font-size: 3.2rem;
+  font-weight: 600;
 }
 
 .weather-icon {
   width: 80px;
   height: 80px;
+  margin: 1rem auto;
 }
 
-.temp-main {
-  font-size: 64px;
-  font-weight: bold;
-  color: #ff7043;
+.description {
+  font-size: 1.1rem;
+  text-transform: capitalize;
+  margin-bottom: 1rem;
 }
 
-.weather-details {
-  font-size: 16px;
-  color: #bbb;
-  margin-top: 10px;
+/* Details Section */
+.details {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+
+.details p {
+  font-size: 0.95rem;
+}
+
+/* Chart Section */
+.chart-container {
+  margin-top: 2rem;
+}
+
+canvas {
+  max-width: 100%;
 }
 
 /* Toggle Buttons */
-.toggle-container {
+.toggle-buttons {
+  margin-top: 1.5rem;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  gap: 1rem;
 }
 
-.toggle-container button {
-  background: #3a3a3a;
+.toggle-buttons button {
+  background-color: #ddd;
   border: none;
-  color: white;
-  padding: 10px 20px;
-  margin: 0 5px;
-  border-radius: 20px;
-  font-size: 14px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.3s;
 }
 
-.toggle-container button.active {
-  background: #ff7043;
+.toggle-buttons button.active {
+  background-color: #007bff;
+  color: white;
 }
 
-/* Chart Container */
-.chart-container {
-  margin-top: 30px;
-  background: #1a1a1a;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05);
+body.dark .toggle-buttons button {
+  background-color: #444;
+  color: #fff;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .weather-info {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+body.dark .toggle-buttons button.active {
+  background-color: #1e90ff;
+  color: white;
+}
 
-  .temp-main {
-    font-size: 48px;
-  }
+/* Dark/Light Mode Toggle */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background-color: #ccc;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  transition: 0.3s ease;
+}
+
+body.dark .theme-toggle {
+  background-color: #444;
+  color: white;
 }
