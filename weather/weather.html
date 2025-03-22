@@ -5,25 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fancy Weather App</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  <!-- Theme toggle button -->
+  <button class="theme-toggle" onclick="toggleTheme()">☀️ / 🌙</button>
+
   <div class="app-container">
-    <div class="weather-header">
-      <h1 id="location">Loading...</h1>
-      <div class="main-temp" id="main-temp">--°C</div>
-      <div class="details" id="details">Feels like --°C | Humidity: --%</div>
-    </div>
+    <div class="weather-box">
+      <h2 class="location">Loading...</h2>
+      <img class="weather-icon" src="" alt="Weather Icon" />
+      <div class="temp">--°C</div>
+      <div class="description">Fetching weather...</div>
 
-    <div class="view-toggle">
-      <button id="hourlyBtn" class="active">24 Hours</button>
-      <button id="dailyBtn">7 Days</button>
-    </div>
+      <div class="details">
+        <p class="humidity">Humidity: --%</p>
+        <p class="wind">Wind: -- km/h</p>
+      </div>
 
-    <canvas id="tempChart"></canvas>
+      <!-- Forecast toggle -->
+      <div class="toggle-buttons">
+        <button id="hourly-btn" class="active">24 Hour</button>
+        <button id="daily-btn">7 Day</button>
+      </div>
 
-    <div class="forecast-cards" id="forecast-cards">
-      <!-- Hourly or daily forecast cards will be inserted here -->
+      <!-- Chart area -->
+      <div class="chart-container">
+        <canvas id="tempChart"></canvas>
+      </div>
     </div>
   </div>
 
