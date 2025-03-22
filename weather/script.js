@@ -1,75 +1,116 @@
 const apiKey = "f170abe618fd7725a4b61cd4eff628cc";
-const weatherBox = document.querySelector(".weather-box");
-const appContainer = document.querySelector(".app-container");
+const currentTemp = document.getElementById("current-temp");
+const currentCity = document.getElementById("current-city");
+const forecastContainer = document.getElementById("forecast-container");
+const modeToggle = document.getElementById("mode-toggle");
+const theme = document.body;
 
-function getWeatherClass(condition) {
-  condition = condition.toLowerCase();
-  if (condition.includes("clear")) return "sunny";
-  if (condition.includes("cloud")) return "cloudy";
-  if (condition.includes("rain")) return "rainy";
-  if (condition.includes("storm") || condition.includes("thunder")) return "stormy";
-  if (condition.includes("snow")) return "snowy";
-  return "default";
+let chartInstance;
+const ctx = document.getElementById("forecast-chart").getContext("2d");
+
+const chartData = {
+  labels: [],
+  datasets: [{
+    label: "Temperature (°C)",
+    data: [],
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    borderColor: "#4bc0c0",
+    borderWidth: 2,
+    fill: true,
+    tension: 0.4,
+    pointBackgroundColor: "#fff"
+  }]
+};
+
+function createChart() {
+  if (chartInstance) chartInstance.destroy();
+  chartInstance = new Chart(ctx, {
+    type: "line",
+    data: chartData,
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        x: { ticks: { color: "#ccc" }, grid: { display: false } },
+        y: { ticks: { color: "#ccc" }, grid: { color: "#333" } }
+      }
+    }
+  });
 }
 
-function fetchWeather(lat, lon) {
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+function updateChart(labels, temps) {
+  chartData.labels = labels;
+  chartData.datasets[0].data = temps;
+  createChart();
+}
+
+function fetchWeather(lat, lon, mode = "hourly") {
+  const endpoint = mode === "hourly" ? "forecast" : "forecast/daily";
+  const cnt = mode === "hourly" ? 8 : 7; // 8 * 3hr blocks (24hrs), 7 days
+  const url = `https://api.openweathermap.org/data/2.5/${endpoint}?lat=${lat}&lon=${lon}&cnt=${cnt}&units=metric&appid=${apiKey}`;
+
   fetch(url)
     .then(res => res.json())
-    .then(data => updateUI(data))
+    .then(data => {
+      const temps = [];
+      const labels = [];
+
+      if (mode === "hourly") {
+        data.list.forEach(entry => {
+          const time = new Date(entry.dt * 1000).toLocaleTimeString([], { hour: "numeric" });
+          labels.push(time);
+          temps.push(entry.main.temp);
+        });
+      } else {
+        data.list.forEach(entry => {
+          const date = new Date(entry.dt * 1000).toLocaleDateString("en-US", { weekday: "short" });
+          labels.push(date);
+          temps.push(entry.temp.day);
+        });
+      }
+
+      updateChart(labels, temps);
+      currentTemp.textContent = `${Math.round(temps[0])}°C`;
+      currentCity.textContent = `${data.city.name}, ${data.city.country}`;
+    })
     .catch(() => {
-      weatherBox.innerHTML = `<p style="color:red;">Failed to fetch weather data.</p>`;
+      currentTemp.textContent = "Error loading data.";
     });
 }
 
-function fetchWeatherByCity(city) {
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-  fetch(url)
-    .then(res => res.json())
-    .then(data => updateUI(data))
-    .catch(() => {
-      weatherBox.innerHTML = `<p style="color:red;">Unable to fetch weather for fallback city.</p>`;
-    });
-}
-
-function getLocationAndWeather() {
+function getLocationAndWeather(mode = "hourly") {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       pos => {
-        fetchWeather(pos.coords.latitude, pos.coords.longitude);
+        const { latitude, longitude } = pos.coords;
+        fetchWeather(latitude, longitude, mode);
       },
       () => {
-        console.warn("Geolocation blocked. Falling back to Mumbai.");
-        fetchWeatherByCity("Mumbai");
+        currentTemp.textContent = "Location access denied.";
       }
     );
   } else {
-    console.warn("Geolocation not supported. Falling back to Mumbai.");
-    fetchWeatherByCity("Mumbai");
+    currentTemp.textContent = "Geolocation not supported.";
   }
 }
 
-function updateUI(data) {
-  const temp = Math.round(data.main.temp);
-  const description = data.weather[0].description;
-  const iconCode = data.weather[0].icon;
-  const humidity = data.main.humidity;
-  const wind = data.wind.speed;
-  const city = data.name;
+forecastContainer.addEventListener("click", (e) => {
+  if (e.target.classList.contains("forecast-toggle")) {
+    document.querySelectorAll(".forecast-toggle").forEach(btn => btn.classList.remove("active"));
+    e.target.classList.add("active");
 
-  const weatherClass = getWeatherClass(description);
-  appContainer.className = `app-container ${weatherClass}`;
+    const mode = e.target.getAttribute("data-mode");
+    getLocationAndWeather(mode);
+  }
+});
 
-  weatherBox.innerHTML = `
-    <h1>${city}</h1>
-    <img class="weather-icon" src="https://openweathermap.org/img/wn/${iconCode}@2x.png" alt="${description}" />
-    <div class="temperature">${temp}°C</div>
-    <div class="description">${description}</div>
-    <div class="details">
-      <p>Humidity: ${humidity}%</p>
-      <p>Wind: ${wind} km/h</p>
-    </div>
-  `;
-}
+modeToggle.addEventListener("click", () => {
+  theme.classList.toggle("dark-mode");
+  theme.classList.toggle("light-mode");
+});
 
-document.addEventListener("DOMContentLoaded", getLocationAndWeather);
+document.addEventListener("DOMContentLoaded", () => {
+  getLocationAndWeather("hourly");
+});
